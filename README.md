@@ -5,23 +5,22 @@ Whenever you click in the window, a circle is fired from the clicked position at
 **Tech Stack:**
 
 * ES6
-* npm
-* Webpack
-* Karma
 * Jasmine
+* Karma
+* Webpack
 
 ## Getting Started
 
 **Installing:**
 
-`npm i`
+`yarn`
 
 \
 **Running app:**
 
-`npm start`
+`yarn start`
 
 \
 **Running test:**
 
-`npm test`
+`yarn test`
