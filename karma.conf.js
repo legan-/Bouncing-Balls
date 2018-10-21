@@ -11,13 +11,13 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'src/js/**/*spec.js'
+      'src/**/*.test.js'
     ],
     exclude: [
 
     ],
     preprocessors: {
-      'src/js/**/*spec.js' : ['webpack'],
+      'src/**/*.test.js' : ['webpack'],
     },
     webpack: webpackConfig,
     reporters: ['mocha'],

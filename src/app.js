@@ -1,3 +1,5 @@
-import './css/base.scss';
+import Canvas from './components/Canvas';
+import './index.scss';
 
-import './js/init.js';
+window.Canvas = new Canvas(document.getElementById('canvas'));
+
