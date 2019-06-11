@@ -11,7 +11,7 @@ Whenever you click in the window, a circle is fired from the clicked position at
 
 ## Getting Started
 
-**Installing:**
+**Installation:**
 
 `yarn`
 
