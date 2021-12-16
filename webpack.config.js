@@ -10,12 +10,11 @@ module.exports = {
   },
   devServer: {
     host: 'localhost',
-    quiet: true,
     port: 3000,
     open: true,
+    hot: true,
   },
   devtool: 'inline-source-map',
-  watch: true,
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
@@ -29,21 +28,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
