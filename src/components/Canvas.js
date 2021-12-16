@@ -1,21 +1,21 @@
-export default class Canvas {
+export class Canvas {
   constructor(elem) {
     this.canvas = elem;
-    this.ctx = elem.getContext('2d'); // context
-    this.height = elem.height;        // height
-    this.width = elem.width;          // width
-    this.gravity = 0.4;               // gravity
-    this.factor = 0.5;                // velocity reduction
-    this.radius = 5;                  // ball radius
-    this.color = '#000';              // ball colour
-    this.balls = [];                  // array of the balls
+    this.ctx = elem.getContext('2d');
+    this.height = elem.height;
+    this.width = elem.width;
+    this.gravity = 0.4;
+    this.factor = 0.5;
+    this.radius = 5;
+    this.color = '#aaa';
+    this.balls = [];
 
     this._initTimer();
     this._clickHandler();
   }
 
   _initTimer() {
-    setInterval(() => this._update(), 1000/60);
+    setInterval(() => this._update(), 1000 / 60);
   }
 
   _initBall(x, y) {
@@ -29,28 +29,25 @@ export default class Canvas {
       vx,
       vy,
       radius,
-      gravity
+      gravity,
     });
   }
 
   _clickHandler() {
-    this.canvas.addEventListener('click', event => {
-      this._initBall(event.offsetX, event.offsetY);
-    }, false);
+    this.canvas.addEventListener(
+      'click',
+      event => {
+        this._initBall(event.offsetX, event.offsetY);
+      },
+      false
+    );
   }
 
   // calculate the next position of the ball
   _calc(i) {
     const ball = this.balls[i];
 
-    let {
-      x,
-      y,
-      vx,
-      vy, 
-      radius,
-      gravity
-    } = ball;
+    let { x, y, vx, vy, radius, gravity } = ball;
 
     vy += gravity;
     x += vx;
@@ -65,7 +62,7 @@ export default class Canvas {
       vx *= this.factor;
       y = this.height - radius;
     }
-   
+
     // left or right border
     if (x < 0 + radius) {
       vx *= -this.factor;
@@ -81,12 +78,12 @@ export default class Canvas {
       vx,
       vy,
       radius,
-      gravity
-    }
+      gravity,
+    };
     return {
       x,
       y,
-      radius
+      radius,
     };
   }
 
@@ -94,21 +91,17 @@ export default class Canvas {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.ctx.fillStyle = this.color;
     this.balls.forEach((ball, i) => {
-      const {
-        x,
-        y,
-        radius
-      } = this._calc(i);
+      const { x, y, radius } = this._calc(i);
 
       this.ctx.beginPath();
-      this.ctx.arc(x, y, radius, 0, 2*Math.PI, true);
+      this.ctx.arc(x, y, radius, 0, 2 * Math.PI, true);
       this.ctx.fill();
     });
   }
 
   // generate a random number
   _random(min, max) {
-    return (Math.random() * (max - min + 1)) + min;
+    return Math.random() * (max - min + 1) + min;
   }
 
   // clear balls array

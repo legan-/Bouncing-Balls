@@ -1,13 +1,21 @@
-import Canvas from './components/Canvas';
+import { Canvas } from './components/Canvas';
 import './index.scss';
 
 const root = document.getElementById('root');
-const canvas = document.createElement('canvas');
-canvas.width = '800';
-canvas.height = '600';
-canvas.className = 'canvas';
 
-root.appendChild(canvas)
+const canvasElement = document.createElement('canvas');
+canvasElement.width = '800';
+canvasElement.height = '600';
+canvasElement.className = 'canvas';
 
-window.Canvas = new Canvas(canvas);
+const canvas = new Canvas(canvasElement);
 
+const button = document.createElement('button');
+button.setAttribute('class', 'button');
+button.textContent = 'Reset';
+button.addEventListener('click', () => {
+  canvas.removeBalls();
+});
+
+root.appendChild(canvasElement);
+root.appendChild(button);
