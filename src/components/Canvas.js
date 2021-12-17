@@ -1,5 +1,9 @@
+export const DEFAULT_SPEED = 60;
+
 export class Canvas {
   constructor(elem) {
+    this.timer = null;
+
     this.canvas = elem;
     this.ctx = elem.getContext('2d');
     this.height = elem.height;
@@ -10,12 +14,18 @@ export class Canvas {
     this.color = '#aaa';
     this.balls = [];
 
+    this.speed = DEFAULT_SPEED;
+
     this._initTimer();
     this._clickHandler();
   }
 
   _initTimer() {
-    setInterval(() => this._update(), 1000 / 60);
+    if (this.timer !== null) {
+      clearInterval(this.timer);
+    }
+
+    this.timer = setInterval(() => this._update(), 1000 / this.speed);
   }
 
   _initBall(x, y) {
@@ -80,6 +90,7 @@ export class Canvas {
       radius,
       gravity,
     };
+
     return {
       x,
       y,
@@ -112,5 +123,22 @@ export class Canvas {
   // add a new ball
   addBall(data) {
     this.balls.push(data);
+  }
+
+  resetSpeed() {
+    this.speed = DEFAULT_SPEED;
+    this._initTimer();
+  }
+
+  set setSpeed(speed) {
+    if (speed === 'fast') {
+      this.speed = 600;
+    }
+
+    if (speed === 'slow') {
+      this.speed = 3;
+    }
+
+    this._initTimer();
   }
 }
