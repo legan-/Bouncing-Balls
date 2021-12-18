@@ -12,14 +12,7 @@
     "css-loader": "6.5.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "5.5.0",
-    "jasmine": "3.10.0",
-    "jasmine-core": "3.10.1",
-    "karma": "6.3.9",
-    "karma-chrome-launcher": "3.1.0",
-    "karma-jasmine": "4.0.1",
-    "karma-mocha-reporter": "^2.2.5",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-webpack": "5.0.0",
+    "jest": "^27.4.5",
     "node-sass": "7.0.0",
     "sass-loader": "12.4.0",
     "style-loader": "3.3.1",
@@ -30,6 +23,6 @@
   "scripts": {
     "webpack": "webpack",
     "start": "webpack & webpack-dev-server",
-    "test": "karma start"
+    "test": "jest"
   }
 }

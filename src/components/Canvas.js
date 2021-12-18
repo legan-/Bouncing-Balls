@@ -101,7 +101,7 @@ export class Canvas {
   _update() {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.ctx.fillStyle = this.color;
-    this.balls.forEach((ball, i) => {
+    this.balls.forEach((_, i) => {
       const { x, y, radius } = this._calc(i);
 
       this.ctx.beginPath();
@@ -118,6 +118,7 @@ export class Canvas {
   // clear balls array
   removeBalls() {
     this.balls = [];
+    this.resetSpeed();
   }
 
   // add a new ball

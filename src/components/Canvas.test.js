@@ -1,4 +1,4 @@
-import Canvas from './canvas.js';
+import { Canvas } from './canvas.js';
 
 const canvasWidth = 600;
 const canvasHeight = 400;
@@ -31,33 +31,43 @@ describe('Canvas', () => {
         x: 10,
         y: 20,
         vx: -2,
-        vy: -8
+        vy: -8,
+        radius: 3,
+        gravity: 0.3,
       },
       {
         x: 25,
         y: 25,
         vx: -3,
-        vy: -7.5
+        vy: -7.5,
+        radius: 4,
+        gravity: 0.4,
       },
       {
         x: 3,
         y: 197,
         vx: -2,
-        vy: -4
+        vy: -4,
+        radius: 3,
+        gravity: 0.3,
       },
       {
         x: 597,
         y: 193,
         vx: 4,
-        vy: -5
+        vy: -5,
+        radius: 4.5,
+        gravity: 0.45,
       },
       {
         x: 380,
         y: 2,
         vx: -1,
-        vy: -5
-      }
-    ]
+        vy: -5,
+        radius: 31,
+        gravity: 0.31,
+      },
+    ];
 
     it('should receive params', () => {
       expect(canvas.height).toBe(canvasHeight);
@@ -71,14 +81,14 @@ describe('Canvas', () => {
       canvas.removeBalls();
     });
 
-    it('should add one ball to store', () => {
+    it('should add one ball to the store', () => {
       canvas.addBall(balls[0]);
       expect(canvas.balls[0]).toEqual(balls[0]);
       canvas.removeBalls();
     });
 
-    it('should add two balls to store', () => {
-      balls.forEach( b => {
+    it('should add two balls to the store', () => {
+      balls.forEach(b => {
         canvas.addBall(b);
       });
       expect(canvas.balls).toEqual(balls);
@@ -87,7 +97,7 @@ describe('Canvas', () => {
 
     it('should calculate and return the next position of the ball', () => {
       canvas.addBall(balls[0]);
-      expect(canvas._calc(0)).toEqual({ x: 8, y: 12.4 });
+      expect(canvas._calc(0)).toMatchObject({ x: 8, y: 12.3 });
       canvas.removeBalls();
     });
 
@@ -95,10 +105,9 @@ describe('Canvas', () => {
       const ball = balls[2];
       canvas.addBall(ball);
       canvas._calc(0);
-      
-      expect(canvas.balls[0]).toEqual({x: 4, y: 193.4, vx: 1, vy: -3.6});
-      canvas.removeBalls();
 
+      expect(canvas.balls[0]).toMatchObject({ x: 3, y: 193.3, vx: 1, vy: -3.7 });
+      canvas.removeBalls();
     });
 
     it('should bounce from the right border', () => {
@@ -106,7 +115,7 @@ describe('Canvas', () => {
       canvas.addBall(ball);
       canvas._calc(0);
 
-      expect(canvas.balls[0]).toEqual({x: 596, y: 188.4, vx: -2, vy: -4.6});
+      expect(canvas.balls[0]).toMatchObject({ x: 595.5, y: 188.45, vx: -2, vy: -4.55 });
       canvas.removeBalls();
     });
 
@@ -115,7 +124,7 @@ describe('Canvas', () => {
       canvas.addBall(ball);
       canvas._calc(0);
 
-      expect(canvas.balls[0]).toEqual({x: 379, y: 4, vx: -1, vy: 2.3});
+      expect(canvas.balls[0]).toMatchObject({ x: 379, y: 31, vx: -1, vy: 2.345 });
       canvas.removeBalls();
     });
 
@@ -125,7 +134,7 @@ describe('Canvas', () => {
 
       canvas.removeBalls();
       expect(canvas.balls).toEqual([]);
-    });    
+    });
 
     it('should generate a random number in a specific range', () => {
       const min = -10;
